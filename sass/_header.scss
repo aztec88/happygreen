@@ -1,0 +1,84 @@
+.top_contact{
+    background: $main_color;
+    
+    .nav_contact_left, .nav_contact_right{
+        position: absolute;
+        li{
+            display: inline-block;
+            padding: 5px 10px;
+            a{
+                font-size: 15px;
+                color: white;
+                text-decoration: none;
+                &:hover{
+                    color: black;
+                }
+            }
+        }
+    }
+    .nav_contact_left{
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+    }
+    .nav_contact_right{
+        top: 50%;
+        right: 0;
+        transform: translate(0, -50%);
+    }
+}
+.nav_contact{
+    position: relative;
+    height: 30px;
+}
+.secondary_menu{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+}
+.second_menu{
+    display: inline;
+    li{
+        display: inline-block;
+        a{
+            padding: 5px 10px;
+            color: $font_color;
+            text-decoration: none;
+            &:hover{
+                background: $main_color;
+                color: white;
+                border-radius: 5px;
+                box-shadow: 0 2px 1px 1px $main_color;
+            }
+        }
+    }
+}
+.menu_right{
+    position: relative;
+    vertical-align: middle;
+    text-align: right;
+    .woocommerce-product-search{
+        display: inline;
+    }
+}
+.main_menu{
+    display: inline;
+    li{
+        display: inline-block;
+        a{
+            padding: 5px 10px;
+            color: $font_color;
+            text-decoration: none;
+            &:hover{
+                background: $main_color;
+                color: white;
+                border-radius: 5px;
+                box-shadow: 0 2px 1px 1px $main_color;
+            }
+        }
+    }
+}
+.main_site_menu{
+    padding-top: 20px;
+}

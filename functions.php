@@ -4,12 +4,12 @@
 
 function theme_register_scripts() {
     wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/sass/includes/bootstrap.min.css', array(), '4.1.0', 'all');
-    wp_enqueue_style('fontawesome', get_template_directory_uri() . '/sass/includes/font-awesome.min.css', array(), '4.7.0', 'all');
-    wp_enqueue_style('fontawesome', get_template_directory_uri() . '/sass/includes/swiper.min.css', array(), '4.2.6', 'all');
+    wp_enqueue_style('fontawesome-css', get_template_directory_uri() . '/sass/includes/font-awesome.min.css', array(), '4.7.0', 'all');
+    wp_enqueue_style('swiper-css', get_template_directory_uri() . '/sass/includes/swiper.min.css', array(), '4.2.6', 'all');
     wp_enqueue_style( 'theme-css', get_stylesheet_uri() );
     wp_enqueue_script( 'bootstrap-js', esc_url( trailingslashit( get_template_directory_uri() ) . 'js/bootstrap.min.js' ), array(), '4.1.0', true );
-    wp_enqueue_script( 'bootstrap-js', esc_url( trailingslashit( get_template_directory_uri() ) . 'js/swiper.min.js' ), array(), '4.2.6', true );
-    wp_enqueue_script( 'theme-js', esc_url( trailingslashit( get_template_directory_uri() ) . 'js/theme.min.js' ), array( 'jquery' ), '1.0', true );
+    wp_enqueue_script( 'swiper-js', esc_url( trailingslashit( get_template_directory_uri() ) . 'js/swiper.min.js' ), array(), '4.2.6', true );
+    wp_enqueue_script( 'theme-js', esc_url( trailingslashit( get_template_directory_uri() ) . 'js/wp-theme.min.js' ), array( 'jquery' ), '1.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'theme_register_scripts', 1 );
 
@@ -72,36 +72,22 @@ function woocommerce_support(){
 	 Post type
 	==========================================
 */
-// function create_posttype() {
-// 	register_post_type( 'promo',
-// 	array(
-// 	  'labels' => array(
-// 		'name' => __( 'Promos' ),
-// 		'singular_name' => __( 'Promo' )
-// 	  ),
-// 	  'public' => true,
-// 	  'has_archive' => true,
-// 	  'menu_icon' => 'dashicons-images-alt2',
-// 	  'rewrite' => array('slug' => 'promo'),
-// 	  'supports' => array('title', 'editor', 'thumbnail')
-// 	)
-//   );
-//   register_post_type( 'service',
-// 	array(
-// 	  'labels' => array(
-// 		'name' => __( 'Services' ),
-// 		'singular_name' => __( 'Service' )
-// 	  ),
-// 	  'public' => true,
-// 	  'has_archive' => true,
-// 	  'menu_icon' => 'dashicons-list-view',
-// 	  'rewrite' => array('slug' => 'services'),
-// 	  'supports' => array('title', 'editor', 'thumbnail','excerpt','custom-fields')
-// 	)
-//   );
-  
-// }
-// add_action( 'init', 'create_posttype' );
+function create_posttype() {
+	register_post_type( 'promo',
+	array(
+	  'labels' => array(
+		'name' => __( 'Promos' ),
+		'singular_name' => __( 'Promo' )
+	  ),
+	  'public' => true,
+	  'has_archive' => true,
+	  'menu_icon' => 'dashicons-images-alt2',
+	  'rewrite' => array('slug' => 'promo'),
+	  'supports' => array('title', 'editor', 'thumbnail')
+	)
+  );
+}
+add_action( 'init', 'create_posttype' );
 
 
 
@@ -152,3 +138,26 @@ function excerpt($limit) {
     return $excerpt;
 }
 
+
+//Woocommerce functions
+
+/**
+ * Show cart contents / total Ajax
+ */
+add_filter( 'woocommerce_add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment' );
+
+function woocommerce_header_add_to_cart_fragment( $fragments ) {
+	global $woocommerce;
+
+	ob_start();
+
+	?>
+	<a class="cart-customlocation" href="<?php echo esc_url(wc_get_cart_url()); ?>" title="<?php _e('View your shopping cart', 'woothemes'); ?>"><?php echo sprintf(_n('%d item', '%d items', $woocommerce->cart->cart_contents_count, 'woothemes'), $woocommerce->cart->cart_contents_count);?> - <?php echo $woocommerce->cart->get_cart_total(); ?></a>
+	<?php
+	$fragments['a.cart-customlocation'] = ob_get_clean();
+	return $fragments;
+}
+
+add_theme_support( 'wc-product-gallery-zoom' );
+add_theme_support( 'wc-product-gallery-lightbox' );
+add_theme_support( 'wc-product-gallery-slider' );

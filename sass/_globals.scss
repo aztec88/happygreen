@@ -7,6 +7,8 @@ html{
 
 body{
     -webkit-font-smoothing: antialiased;
+    background: #F5F5F5;
+    font-family: 'Open Sans', sans-serif;
 }
 
 *{
@@ -41,8 +43,82 @@ body{
 
 .clr{clear:both;}
 
+//Woocommerce style
 
+.woocommerce ul.products li.product, .woocommerce-page ul.products li.product{
+    background: white!important;
+    position: relative!important;
+    height: 350px!important;
+    -webkit-box-shadow: 0px 6px 25px -1px rgba(173,173,173,0.78);
+    -moz-box-shadow: 0px 6px 25px -1px rgba(173,173,173,0.78);
+    box-shadow: 0px 6px 25px -1px rgba(173,173,173,0.78);
+    
+}
+.woocommerce ul.products li.product .button{
+    position: absolute!important;
+    bottom: -20px;
+    left: 50%;
+    transform: translatex(-50%);
+    text-align: center;
+    background: $second_color;
+    color: white;
+    -webkit-box-shadow: 0px 6px 25px -1px rgba(173,173,173,0.78);
+    -moz-box-shadow: 0px 6px 25px -1px rgba(173,173,173,0.78);
+    box-shadow: 0px 6px 25px -1px rgba(173,173,173,0.78);
+    font-size: 16px;
+    &:hover{
+        background: $main_color;
+    }
+    
+}
+.woocommerce ul.products li.product a img{
+    margin-top: 55px!important;
+    max-height: 180px!important;  
+}
+h2.woocommerce-loop-product__title{
+    text-align: center!important;
+    color: $font_second;
+    text-transform: uppercase;
+    font-weight: bold;
 
-
-
-
+}
+.woocommerce ul.products li.product .price{
+    ins{
+        padding: 20px;
+        font-size: 13px;
+        position: absolute!important;
+        top: 0!important;
+        right: 0!important;
+        text-decoration: none;
+        color: white;
+        font-weight: bold!important;
+        background : $main_color!important;
+        .woocommerce-Price-currencySymbol{
+            position: relative!important;
+        }
+    }
+    del{
+        padding: 20px;
+        font-size: 13px;
+        position: absolute!important;
+        font-weight: bold!important;
+        top: 0!important;
+        left: 0!important;
+        transform: translateX(0)!important;
+        opacity: 1!important;
+        color: $font_second!important;
+        .woocommerce-Price-currencySymbol{
+            position: relative!important;
+        }
+    }
+}
+.woocommerce ul.products li.product .onsale{
+    position: absolute!important;
+    left: 50%!important;
+    top: 218px!important;
+    transform: translateX(-50%);
+    background: none;
+    color: $font_second;
+    font-weight: bold;
+    text-transform: uppercase;
+}
